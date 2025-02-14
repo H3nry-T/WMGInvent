@@ -1,8 +1,20 @@
 from flask import Flask, render_template, session, redirect, request, flash
 import secrets
+import os
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(16)  # Generate a secure secret key for sessions
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+db = SQLAlchemy(app)
+
+class User(db.Model, UserMixin): 
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
 
 @app.route('/')
 def home():
@@ -19,7 +31,6 @@ def login():
         password = request.form.get('password')
         
         # TODO: Add your authentication logic here
-        # For demonstration, let's use a simple check
         if username == "admin" and password == "password":
             session['user'] = username
             return redirect('/')
