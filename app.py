@@ -1,20 +1,21 @@
 from flask import Flask, render_template, session, redirect, request, flash
 import secrets
-import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-from dotenv import load_dotenv
+from config import Config
 
-load_dotenv()
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
-class User(db.Model, UserMixin): 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(200), nullable=False)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    
+    # Initialize extensions
+    db.init_app(app)
+    
+    return app, db
+
+app, db = create_app()
 
 @app.route('/')
 def home():
