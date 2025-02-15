@@ -1,6 +1,6 @@
 # seed.py
 from app import create_app
-from extensions import db
+from global_db_object import db
 from werkzeug.security import generate_password_hash
 from models.UserModel import User
 app, _ = create_app()  # Destructure the tuple to get just the app
