@@ -1,16 +1,15 @@
 from flask import Flask, render_template, session, redirect, request, flash
-import secrets
+from config import Config
+from werkzeug.security import generate_password_hash
+import os
+from models.UserModel import User
+from sqlalchemy import inspect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-from config import Config
-
-db = SQLAlchemy()
-
+from extensions import db
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    
-    # Initialize extensions
     db.init_app(app)
     
     return app, db

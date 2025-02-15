@@ -1,19 +1,37 @@
-# seed.py
-from app import create_app, db
+import os
+from extensions import db
 from models.UserModel import User
+from werkzeug.security import generate_password_hash
+from flask import Flask
+from config import Config
 
-app, db = create_app()
+def seed_database():
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_path = os.path.join(base_dir, 'database.db')
+    
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Database path: {db_path}")
 
-with app.app_context():
-    db.drop_all()   # optional: if you want to drop existing
-    db.create_all()
-    print("Database tables created successfully!")
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    db.init_app(app)
 
-    # Seed the data
-    admin = User(username="admin", password_hash="...")
-    user2 = User(username="john_doe", password_hash="...")
+    with app.app_context():
+        db.create_all()
+        
+        if not os.path.exists(db_path):
+            print("ERROR: Database file was not created!")
+            return
 
-    db.session.add(admin)
-    db.session.add(user2)
-    db.session.commit()
-    print("Database seeded with initial data!")
+        admin = User()
+        admin.username = "admin"
+        admin.password_hash = generate_password_hash("admin123")
+        db.session.add(admin)
+        db.session.commit()
+        
+        print(f"Database created successfully at {db_path}")
+        print(f"Size: {os.path.getsize(db_path)} bytes")
+        print(f"Users: {[user.username for user in User.query.all()]}")
+
+if __name__ == "__main__":
+    seed_database()
