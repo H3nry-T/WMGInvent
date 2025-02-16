@@ -14,11 +14,11 @@ app, db = create_app()
 
 @app.route('/')
 def home():
-    #grab the user from the session and check if user is logged in, if not logged in, take me to the login page.
     user = session.get('user')
-    if not user:
+    if user:
+        return render_template('index.html', user=user)
+    else:
         return redirect('/login')
-    return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
