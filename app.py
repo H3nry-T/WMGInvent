@@ -1,11 +1,12 @@
 from flask import Flask, render_template, session, redirect, request, flash
 from config import Config
 from global_db_object import db
+from services.UserService import AuthenticationService
+from repositories.UserRepository import UserRepository
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
-    from models.UserModel import User
     
     return app, db
 
@@ -26,7 +27,11 @@ def login():
         password = request.form.get('password')
         
         # TODO: Add your authentication logic here
-        if username == "admin" and password == "password":
+        is_authenticated = False
+        if username and password: 
+            is_authenticated = AuthenticationService(UserRepository(db)).authenticate(username=username, password=password)
+        
+        if is_authenticated:
             session['user'] = username
             return redirect('/')
         else:

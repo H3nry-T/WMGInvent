@@ -6,7 +6,7 @@ from models.UserModel import User
 app, _ = create_app()  # Destructure the tuple to get just the app
 
 with app.app_context():
-    db.drop_all()   # optional: if you want to drop existing
+    db.drop_all()  
     db.create_all()
     print("Created tables in: ", db.engine.url, db.engine.dialect.name)
     print("Tables: ", db.metadata.tables.keys())

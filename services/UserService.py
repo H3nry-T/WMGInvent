@@ -10,8 +10,8 @@ class AuthenticationService:
         user = self.user_repository.create_user(username, password)
         return True, "User registered successfully"
     
-    def login_user(self, username, password): 
+    def authenticate(self, username: str, password: str) -> bool: 
         user = self.user_repository.get_user_by_username(username)
-        if not user or not check_password_hash(user.password_hash, password): 
-            return False, "Invalid username or password"
-        return True, "Login successful"
+        if not user:
+            return False
+        return check_password_hash(user.password_hash, password)
