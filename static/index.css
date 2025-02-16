@@ -115,7 +115,7 @@
   .top-right {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   .top-links {
     display: flex;
@@ -128,18 +128,76 @@
     text-decoration: underline;
   }
   
-  /* User area */
-  .user-area {
+  /* User Area Styling */
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: background-color 0.2s;
+    cursor: pointer;
+  }
+  
+  .user-profile:hover {
+    background-color: hsl(var(--accent));
+    
+  }
+  
+  .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: hsl(var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .avatar img {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: hsl(var(--secondary-foreground));
+  }
+  
+  .user-info {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
   }
+  
   .user-name {
+    color: hsl(var(--foreground));
     font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.2;
   }
+  
   .user-role {
-    font-size: 0.8rem;
-    color: #777;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.85rem;
+  }
+  
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: background-color 0.2s;
+  }
+  
+  .logout-btn:hover {
+    background-color: hsl(var(--accent));
+  }
+  
+  .logout-btn img {
+    width: 1.25rem;
+    height: 1.25rem;
+    opacity: 0.7;
+  }
+  
+  .logout-btn:hover img {
+    opacity: 1;
   }
   
   /* CONTENT AREA */

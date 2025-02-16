@@ -73,9 +73,19 @@
             </nav>
             
         </div>
-        <div class="user-area">
-            <span class="user-name">Henry</span>
-            <span class="user-role">Manager</span>
+        <div class="top-right">
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="static/person.svg" alt="User avatar">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">{{user}}</span>
+                    <span class="user-role">Admin</span>
+                </div>
+            </div>
+            <a href="/logout" class="logout-btn">
+                <img src="static/logout.svg" alt="Logout">
+            </a>
         </div>
       </header>
 
