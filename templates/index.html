@@ -5,6 +5,7 @@
   <title>WMGInvent Mock UI</title>
   <link rel="stylesheet" href="static/root.css"/>
   <link rel="stylesheet" href="static/index.css" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
@@ -13,7 +14,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <span class="app-name">WMGInvent</span>
+        <span class="app-name">WMGInvent</span> <img src="static/Box.svg" class="app-icon">
       </div>
       <nav class="menu">
         <a href="#" class="menu-item active">
@@ -59,8 +60,10 @@
       <!-- Top Bar / Header -->
       <header class="top-bar">
         <div class="top-left">
-          <button class="menu-toggle">&#9776;</button>
-          <input type="search" placeholder="Search" class="search-input" />
+            <button class="menu-toggle">&#9776;</button>
+            <button class="notification-btn">
+                <img src="static/bell.svg" alt="Notifications" class="bell-icon">
+            </button>
         </div>
         <div class="top-right">
           <nav class="top-links">
@@ -78,49 +81,55 @@
 
       <!-- Filter & Product Content -->
       <div class="content-area">
+        <!-- Left Sidebar Filters -->
         <div class="filters">
           <h3>Filters</h3>
+          
+          <!-- Search -->
+          <div class="search-container">
+            <input type="search" placeholder="Search" class="search-input" />
+          </div>
+
+          <!-- Keywords -->
           <div class="keyword-filters">
             <p>Keywords:</p>
-            <span class="keyword-tag">Cable</span>
-            <span class="keyword-tag">Smart</span>
-            <span class="keyword-tag">Modern</span>
+            <div class="keyword-tags">
+              <span class="keyword-tag">Cable <button class="remove-tag">×</button></span>
+              <span class="keyword-tag">Smart <button class="remove-tag">×</button></span>
+              <span class="keyword-tag">Modern <button class="remove-tag">×</button></span>
+            </div>
           </div>
+
+          <!-- Stock Range -->
           <div class="stock-filter">
             <label for="stockRange">Stock: 0 - 1000</label>
             <input type="range" id="stockRange" min="0" max="1000" />
           </div>
-          <h4>Sort by</h4>
-          <div class="checkbox-filters">
-            <label>
-              <input type="checkbox" checked/> RAM
-            </label>
-            <label>
-              <input type="checkbox" checked/> CPU
-            </label>
-            <label>
-              <input type="checkbox" checked/> Operating system
-            </label>
-            <label>
-              <input type="checkbox" checked/> Storage
-            </label>
-            <label>
-              <input type="checkbox" checked/> Warranty
-            </label>
+
+          <!-- Sort by Checkboxes -->
+          <div class="filter-section">
+            <h4>Sort by</h4>
+            <div class="checkbox-filters">
+              <label><input type="checkbox" checked/> RAM</label>
+              <label><input type="checkbox" checked/> CPU</label>
+              <label><input type="checkbox" checked/> Operating system</label>
+              <label><input type="checkbox" checked/> Storage</label>
+              <label><input type="checkbox" checked/> Warranty</label>
+            </div>
           </div>
         </div>
 
-        <!-- Product Grid -->
+        <!-- Main Products Area -->
         <div class="products">
-          <!-- Sorting buttons -->
-          <div class="sorting-bar">
-            <button class="sort-btn active">New</button>
-            <button class="sort-btn">Price ascending</button>
-            <button class="sort-btn">Price descending</button>
-            <button class="sort-btn">Stock descending</button>
+          <!-- Sort Pills -->
+          <div class="sorting-pills">
+            <button class="sort-pill active">New</button>
+            <button class="sort-pill">Price ascending</button>
+            <button class="sort-pill">Price descending</button>
+            <button class="sort-pill">Stock Descending</button>
           </div>
 
-          <!-- Product cards -->
+          <!-- Product Grid -->
           <div class="product-grid">
             <div class="product-card">
               <img src="images/headphones.jpg" alt="Headphones" />
