@@ -22,8 +22,9 @@ class AuthenticationService:
             return False
         return True
     
-    def authenticate(self, username: str, password: str) -> bool: 
+    def authenticate_user(self, username: str, password: str) -> bool: 
         user = self.user_repository.get_user_by_username(username)
-        if user is None: 
-            return False
-        return check_password_hash(user.password_hash, password)
+        if user and check_password_hash(user.password_hash, password):
+            return user
+        else: 
+            raise Exception("problem with authenticating user")
