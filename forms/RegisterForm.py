@@ -24,6 +24,6 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
-        username_is_allowed = AuthenticationService(UserRepository(db)).validate_username(username.data)
-        if username_is_allowed:
+        username_available = AuthenticationService(UserRepository(db)).username_available(username.data)
+        if not username_available:
             raise ValidationError('Username already exists. Please choose a different one.')

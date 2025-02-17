@@ -49,17 +49,10 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        hashed_password = generate_password_hash(form.password.data)
-        
-        # Create new user
-        user = {
-            'username': form.username.data,
-            'email': form.email.data,
-            'password': hashed_password
-        }
-        
+        username = form.username.data
+        password = form.password.data
         try:
-            UserRepository(db).create_user(user)
+            AuthenticationService(UserRepository(db)).register_user(username, password)
             flash('Registration successful! Please login.', 'success')
             return redirect(url_for('login'))
         except Exception as e:
