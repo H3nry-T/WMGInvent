@@ -6,141 +6,59 @@
     <meta name="description" content="WMGInvent Login Page">
     <title>WMGInvent - Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='root.css') }}">
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: hsl(var(--background));
-        }
-
-        .title {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 2rem 0;
-            color: hsl(var(--foreground));
-        }
-
-        .login-body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-container {
-            width: 100%;
-            max-width: 400px;
-            padding: 2rem;
-            border: 1px solid hsl(var(--border));
-            background-color: hsl(var(--card));
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: hsl(var(--foreground));
-            font-size: 0.9rem;
-        }
-
-        input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid hsl(var(--border));
-            border-radius: var(--radius);
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-        }
-
-        .sign-in-button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: hsl(var(--primary));
-            color: white;
-            border: none;
-            border-radius: var(--radius);
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-
-        .sign-in-button:hover {
-            background-color: hsl(var(--primary));
-        }
-
-        .links {
-            margin-top: 1rem;
-            text-align: center;
-        }
-
-        .links a {
-            color: hsl(var(--muted-foreground));
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: block;
-            margin-top: 0.5rem;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .flash-messages {
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: 1rem;
-        }
-
-        .flash-message {
-            padding: 0.75rem;
-            border-radius: var(--radius);
-            background-color: hsl(var(--destructive));
-            color: white;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="login-body">
-    <h1 class="title">WMGInvent</h1>
+<body class="min-h-screen flex flex-col items-center bg-background">
+    <h1 class="text-4xl font-bold my-8 text-foreground">WMGInvent</h1>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <div class="flash-messages">
+        <div class="w-full max-w-md mb-4">
             {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
+            <div class="p-3 rounded bg-destructive text-white text-center mb-2">
+                {{ message }}
+            </div>
             {% endfor %}
         </div>
         {% endif %}
     {% endwith %}
-    <div class="login-container">
+
+    <div class="w-full max-w-md p-8 border border-border bg-card rounded-lg shadow-sm">
         <form action="{{ url_for('login') }}" method="POST">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+            <div class="mb-4">
+                <label for="username" class="block mb-2 text-sm text-foreground">
+                    Username
+                </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    required
+                    class="w-full p-3 border border-border rounded-md text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                >
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+            <div class="mb-4">
+                <label for="password" class="block mb-2 text-sm text-foreground">
+                    Password
+                </label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    required
+                    class="w-full p-3 border border-border rounded-md text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                >
             </div>
-            <button type="submit" class="sign-in-button">Sign In</button>
-            <div class="links">
-                <a href="{{ url_for('register') }}">Don't have an account?</a>
+            <button 
+                type="submit" 
+                class="w-full p-3 bg-primary text-white rounded-md text-base cursor-pointer mt-4 hover:bg-primary/90 transition-colors"
+            >
+                Sign In
+            </button>
+            <div class="mt-4 text-center">
+                <a href="{{ url_for('register') }}" class="text-sm text-muted-foreground hover:underline">
+                    Don't have an account?
+                </a>
             </div>
         </form>
     </div>
