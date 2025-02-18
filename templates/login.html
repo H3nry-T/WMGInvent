@@ -10,7 +10,7 @@
 </head>
 <body class="min-h-screen bg-[hsl(var(--primary-background))] flex flex-col items-center justify-center p-4">
     <div class="w-full max-w-md space-y-8">
-        <!-- Logo/Title -->
+        <!-- login title -->
         <div class="text-center">
             <h1 class="text-3xl font-bold text-[hsl(var(--foreground))]">
                 WMGInvent
@@ -20,7 +20,7 @@
             </p>
         </div>
 
-        <!-- Flash Messages -->
+        <!-- flash message -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
             <div class="space-y-2">
@@ -33,14 +33,14 @@
             {% endif %}
         {% endwith %}
 
-        <!-- Login Form -->
+        <!-- login form -->
         <div class="bg-[hsl(var(--card-background))] rounded-lg border border-[hsl(var(--border))] shadow-sm p-8">
             <form action="{{ url_for('login') }}" method="POST" class="space-y-6">
                 {{ form.hidden_tag() }}
                 <div>
                     {{ form.username.label }}
                     <div class="mt-1">
-                        {{ form.username(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] focus:border-transparent") }}
+                        {{ form.username(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md") }}
                     </div>
                     {% for error in form.username.errors %}
                         <div class="text-[hsl(var(--destructive))]">{{ error }}</div>
@@ -50,7 +50,7 @@
                 <div>
                     {{ form.password.label }}
                     <div class="mt-1">
-                        {{ form.password(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] focus:border-transparent") }}
+                        {{ form.password(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md") }}
                     </div>
                     {% for error in form.password.errors %}
                         <div class="text-[hsl(var(--destructive))]">{{ error }}</div>

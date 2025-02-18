@@ -10,7 +10,7 @@
 </head>
 <body class="min-h-screen bg-[hsl(var(--primary-background))] flex flex-col items-center justify-center p-4">
     <div class="w-full max-w-md space-y-8">
-        <!-- Logo/Title -->
+        <!-- title -->
         <div class="text-center">
             <h1 class="text-3xl font-bold text-[hsl(var(--foreground))]">
                 WMGInvent
@@ -20,25 +20,33 @@
             </p>
         </div>
 
-        <!-- Flash Messages -->
+        <!-- flash message -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="space-y-2">
                     {% for category, message in messages %}
-                        <div class="p-4 rounded-md {% if category == 'error' %}bg-red-50 text-red-700{% else %}bg-green-50 text-green-700{% endif %}">
+                        {% if category == 'error' %}
+                        <div class="p-4 rounded-md bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))]">
                             {{ message }}
                         </div>
+                        {% elif category == 'success' %}
+                            <div class="p-4 rounded-md bg-green-50 text-green-700">
+                                {{ message }}
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
         {% endwith %}
 
-        <!-- Registration Form -->
+        
+
+        <!-- registration form -->
         <div class="bg-[hsl(var(--card-background))] rounded-lg border border-[hsl(var(--border))] shadow-sm p-8">
             <form method="POST" action="{{ url_for('register') }}" class="space-y-6">
                 {{ form.hidden_tag() }}
                 
-                <!-- Username Field -->
+                <!-- username field -->
                 <div>
                     {{ form.username.label(class="block text-sm font-medium text-[hsl(var(--foreground))]") }}
                     <div class="mt-1">
@@ -52,11 +60,11 @@
                 </div>
 
 
-                <!-- Password Field -->
+                <!-- password field -->
                 <div>
                     {{ form.password.label(class="block text-sm font-medium text-[hsl(var(--foreground))]") }}
                     <div class="mt-1">
-                        {{ form.password(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] focus:border-transparent") }}
+                        {{ form.password(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md") }}
                         {% if form.password.errors %}
                             {% for error in form.password.errors %}
                                 <p class="mt-1 text-sm text-red-600">{{ error }}</p>
@@ -65,11 +73,11 @@
                     </div>
                 </div>
 
-                <!-- Confirm Password Field -->
+                <!-- confirm password field -->
                 <div>
                     {{ form.confirm_password.label(class="block text-sm font-medium text-[hsl(var(--foreground))]") }}
                     <div class="mt-1">
-                        {{ form.confirm_password(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] focus:border-transparent") }}
+                        {{ form.confirm_password(class="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md") }}
                         {% if form.confirm_password.errors %}
                             {% for error in form.confirm_password.errors %}
                                 <p class="mt-1 text-sm text-red-600">{{ error }}</p>
@@ -78,10 +86,10 @@
                     </div>
                 </div>
 
-                <!-- Submit Button -->
-                {{ form.submit(class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[hsl(var(--primary-foreground))] bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/.9 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(var(--ring))]") }}
+                <!-- submit button -->
+                {{ form.submit(class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[hsl(var(--primary-foreground))] bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/.9") }}
 
-                <!-- Login Link -->
+                <!-- login link -->
                 <div class="text-center mt-4">
                     <a href="{{ url_for('login') }}" class="text-sm text-[hsl(var(--primary))] hover:text-[hsl(var(--primary))]/.9">
                         Already have an account? Sign in
