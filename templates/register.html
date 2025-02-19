@@ -43,7 +43,7 @@
 
         <!-- registration form -->
         <div class="bg-[hsl(var(--card-background))] rounded-lg border border-[hsl(var(--border))] shadow-sm p-8">
-            <form method="POST" action="{{ url_for('register') }}" class="space-y-6">
+            <form method="POST" action="{{ url_for('auth.register') }}" class="space-y-6">
                 {{ form.hidden_tag() }}
                 
                 <!-- username field -->
