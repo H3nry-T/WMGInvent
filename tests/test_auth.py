@@ -3,7 +3,7 @@ import unittest
 from app import create_app, db
 from config import TestingConfig
 from models.UserModel import User
-
+from werkzeug.security import generate_password_hash
 class AuthTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -32,9 +32,15 @@ class AuthTestCase(unittest.TestCase):
         )
         self.assertIn(b"Registration successful", response.data)
 
-        # Optionally verify user is in the DB
-        user = User.query.filter_by(username="testuser").first()
+        # Verify user in DB with credentials
+        user: User | None = User.query.filter_by(username="testuser").first()
         self.assertIsNotNone(user)
+        if user: 
+            self.assertEqual(user.username, "testuser")
+            reverse_password_hash = generate_password_hash("testpassword")
+            self.assertTrue(user.password_hash, reverse_password_hash)
+        else: 
+            self.fail("User not found in DB")
 
     def test_login(self):
         """Test user login flow."""

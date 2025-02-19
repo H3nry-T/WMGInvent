@@ -10,6 +10,7 @@ from flask_login import LoginManager, UserMixin, login_required, login_user, log
 from models.UserModel import User
 from flask_login import LoginManager
 from routes.auth_routes import auth_routes
+from flask_migrate import Migrate
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -18,15 +19,18 @@ def create_app(config_class=Config):
     
     login_manager = LoginManager()
     login_manager.init_app(app)
+    login_manager.login_view = 'auth.login' # type: ignore
+    login_manager.login_message = 'Please log in to access this page.'
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(user_id)
+        return User.query.get(int(user_id))
     
     app.register_blueprint(auth_routes)
     return app
 
 app = create_app()
+migrate = Migrate(app, db)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

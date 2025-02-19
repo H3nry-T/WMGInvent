@@ -36,8 +36,9 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        role = form.role.data
         try:
-            AuthenticationService(UserRepository(db)).register_user(username, password)
+            AuthenticationService(UserRepository(db)).register_user(username, password, role)
             flash('Registration successful! Please login.', 'success')
             return redirect(url_for('auth.login'))
         except Exception as e:

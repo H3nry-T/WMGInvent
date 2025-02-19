@@ -7,11 +7,11 @@ class AuthenticationService:
     def __init__(self, user_repository: UserRepository): 
         self.user_repository = user_repository
     
-    def register_user(self, username: str, password: str) -> User: 
+    def register_user(self, username: str, password: str, role: str) -> User: 
         """Registers a new user and returns the user object if successful or raises an exception if not"""
         if self.username_available(username):
             hashed_password = generate_password_hash(password)
-            user = self.user_repository.create_user(username, hashed_password)
+            user = self.user_repository.create_user(username, hashed_password, role)
             return user
         else: 
             raise Exception("problem with registering user")

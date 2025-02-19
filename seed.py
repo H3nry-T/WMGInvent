@@ -3,7 +3,8 @@ from app import create_app
 from global_db_object import db
 from werkzeug.security import generate_password_hash
 from models.UserModel import User
-app, _ = create_app()  # Destructure the tuple to get just the app
+
+app = create_app()
 
 with app.app_context():
     db.drop_all()  
@@ -15,6 +16,7 @@ with app.app_context():
     admin = User()
     admin.username = "admin"
     admin.password_hash = generate_password_hash("admin123")
+    admin.role = "admin"
     db.session.add(admin)
     db.session.commit()
     print("Database seeded with initial data!")

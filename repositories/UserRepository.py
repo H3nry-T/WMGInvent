@@ -43,10 +43,11 @@ class UserRepository(IRepository):
     def get_user_by_username(self, username: str) -> User | None: 
         return self.get_by_filter("username", username)
 
-    def create_user(self, username: str, hashed_password: str) -> User:
+    def create_user(self, username: str, hashed_password: str, role: str) -> User:
         user = User()
         user.username = username
         user.password_hash = hashed_password
+        user.role = role
         self.db.session.add(user)
         self.db.session.commit()
         return user
