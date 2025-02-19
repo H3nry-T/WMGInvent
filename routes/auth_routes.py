@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
-from services.UserService import AuthenticationService
+from services.AuthService import AuthenticationService
 from repositories.UserRepository import UserRepository
 from global_db_object import db
 
