@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, request, flash, url_for
 from config import Config
 from global_db_object import db
-from services.UserService import AuthenticationService
+from services.AuthService import AuthenticationService
 from repositories.UserRepository import UserRepository
 from forms.RegisterForm import RegisterForm
 from forms.LoginForm import LoginForm

@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, InputRequired
 from repositories.UserRepository import UserRepository
-from services.UserService import AuthenticationService
+from services.AuthService import AuthenticationService
 from global_db_object import db
 
 class RegisterForm(FlaskForm):
