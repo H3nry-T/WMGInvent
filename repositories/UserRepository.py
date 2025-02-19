@@ -1,11 +1,17 @@
 from models.UserModel import User
 from typing import Dict
-class UserRepository: 
+from repositories.IRepository import IRepository
+
+class UserRepository(IRepository): 
     def __init__(self, db): 
         self.db = db 
+
+    def get_by_filter(self, column, value): 
+        filter_dict = {column: value}
+        return User.query.filter_by(**filter_dict).first()
     
     def get_user_by_username(self, username: str) -> User | None: 
-        return User.query.filter_by(username=username).first()
+        return self.get_by_filter("username", username)
 
     def create_user(self, username: str, hashed_password: str) -> User:
         user = User()
