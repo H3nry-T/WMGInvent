@@ -1,9 +1,9 @@
-
 import unittest
 from app import create_app, db
 from config import TestingConfig
 from models.UserModel import User
 from werkzeug.security import generate_password_hash
+
 class AuthTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -19,28 +19,54 @@ class AuthTestCase(unittest.TestCase):
         db.drop_all()
         cls.app_context.pop()
 
-    def test_register(self):
-        """Test user registration flow."""
+    def test_successful_register(self):
+        """Test successful user registration flow."""
         response = self.client.post(
             "/register",
             data={
-                "username": "testuser",
+                "username": "testregister",
                 "password": "testpassword",
-                "confirm_password": "testpassword"
+                "confirm_password": "testpassword",
+                "role": "admin"
             },
             follow_redirects=True
         )
         self.assertIn(b"Registration successful", response.data)
 
         # Verify user in DB with credentials
-        user: User | None = User.query.filter_by(username="testuser").first()
+        user: User | None = User.query.filter_by(username="testregister").first()
         self.assertIsNotNone(user)
         if user: 
-            self.assertEqual(user.username, "testuser")
-            reverse_password_hash = generate_password_hash("testpassword")
-            self.assertTrue(user.password_hash, reverse_password_hash)
+            self.assertEqual(user.username, "testregister")
+            self.assertEqual(user.password_hash, generate_password_hash("testpassword"))
+            self.assertEqual(user.role, "admin")
         else: 
             self.fail("User not found in DB")
+
+    def test_failed_register(self):
+        """Test user registration flow."""
+        response = self.client.post(
+            "/register",
+            data={
+                "username": "testrepeat",
+                "password": "testpassword",
+                "confirm_password": "testpassword",
+                "role": "manager"
+            },
+            follow_redirects=False
+        )
+        response = self.client.post(
+            "/register",
+            data={
+                "username": "testrepeat",
+                "password": "testpassword",
+                "confirm_password": "testpassword",
+                "role": "manager"
+            },
+            follow_redirects=True
+        )
+        # Check if the user already exists
+        self.assertIn(b"Username already exists", response.data)
 
     def test_login(self):
         """Test user login flow."""
@@ -50,7 +76,8 @@ class AuthTestCase(unittest.TestCase):
             data={
                 "username": "testlogin",
                 "password": "test12345",
-                "confirm_password": "test12345"
+                "confirm_password": "test12345",
+                "role": "manager"
             },
             follow_redirects=True
         )
@@ -60,7 +87,7 @@ class AuthTestCase(unittest.TestCase):
             "/login",
             data={
                 "username": "testlogin",
-                "password": "test12345"
+                "password": "test12345",
             },
             follow_redirects=True
         )
@@ -76,7 +103,8 @@ class AuthTestCase(unittest.TestCase):
             data={
                 "username": "testlogout",
                 "password": "logoutpass",
-                "confirm_password": "logoutpass"
+                "confirm_password": "logoutpass",
+                "role": "manager"
             },
             follow_redirects=True
         )
