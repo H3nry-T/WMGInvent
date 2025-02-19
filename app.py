@@ -10,14 +10,14 @@ from flask_login import LoginManager, UserMixin, login_required, login_user, log
 from models.UserModel import User
 from flask_login import LoginManager
 
-def create_app():
+def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
     db.init_app(app)
     
-    return app, db
+    return app
 
-app, db = create_app()
+app = create_app()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
