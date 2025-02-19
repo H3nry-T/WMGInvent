@@ -1,0 +1,108 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WMGInvent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='root.css') }}">
+</head>
+<body class="bg-[hsl(var(--background))] text-[hsl(var(--foreground))] font-inter">
+  
+  <div class="flex min-h-screen">
+    <!-- SIDEBAR -->
+    <aside class="flex flex-col min-w-[240px] items-center border-r border-[hsl(var(--border))] bg-[hsl(var(--primary-background))]">
+        <div class="p-4 flex items-center gap-4">
+          <span class="text-xl font-semibold">WMGInvent</span>
+          <img src="static/Box.svg" class="w-8 h-8">
+        </div>
+        <nav class="space-y-2 p-4 w-full">
+          <a href="#" class="flex items-center gap-4 p-2 rounded-md bg-[hsl(var(--accent))]">
+            <img src="static/tv.svg" class="w-5 h-5">
+            <div>
+              <p class="font-medium">Electronics</p>
+              <p class="text-sm text-[hsl(var(--muted-foreground))]">All electronics</p>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+            <img src="static/speaker.svg" class="w-5 h-5">
+            <div>
+              <p class="font-medium">Furniture</p>
+              <p class="text-sm text-[hsl(var(--muted-foreground))]">All furniture</p>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+            <img src="static/cog.svg" class="w-5 h-5">
+            <div>
+              <p class="font-medium">Auto parts</p>
+              <p class="text-sm text-[hsl(var(--muted-foreground))]">All auto parts</p>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+            <img src="static/person.svg" class="w-5 h-5">
+            <div>
+              <p class="font-medium">Fashion</p>
+              <p class="text-sm text-[hsl(var(--muted-foreground))]">All fashion</p>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+            <img src="static/cup.svg" class="w-5 h-5">
+            <div>
+              <p class="font-medium">Food</p>
+              <p class="text-sm text-[hsl(var(--muted-foreground))]">All food</p>
+            </div>
+          </a>
+        </nav>
+      </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="flex-1 flex flex-col">
+      
+      <!-- HEADER / TOP BAR -->
+      <header class="border-b border-[hsl(var(--border))] bg-[hsl(var(--primary-background))] px-4 py-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <button class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+              <img src="static/menu.svg" alt="menu button" class="w-5 h-5">
+            </button>
+            <button class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+              <img src="static/bell.svg" alt="Notifications" class="w-5 h-5">
+            </button>
+          </div>
+    
+          <nav class="flex gap-2">
+            <a href="#" class="text-sm font-medium hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--accent))] py-2 px-4 rounded-md">Browse Products</a>
+            <a href="#" class="text-sm font-medium hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--accent))] py-2 px-4 rounded-md">Order View</a>
+            <a href="#" class="text-sm font-medium hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--accent))] py-2 px-4 rounded-md">Analytics</a>
+          </nav>
+          <div class="flex items-center gap-4">
+            <!-- user info -->
+            <div class="flex items-center gap-3 px-2 rounded-md hover:bg-[hsl(var(--accent))] cursor-pointer">
+              <div class="w-6 h-6 rounded-full bg-[hsl(var(--secondary))] flex items-center justify-center">
+                <img src="static/person.svg" alt="User avatar" class="w-4 h-4">
+              </div>
+              <div>
+                <span class="text-xs">{{user}}</span>
+                <p class="text-xs text-[hsl(var(--muted-foreground))]">Admin</p>
+              </div>
+            </div>
+            <!-- logout button -->
+            <a href="/logout" class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+              <img src="static/logout.svg" alt="Logout" class="w-5 h-5 opacity-70 hover:opacity-100">
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE-SPECIFIC CONTENT -->
+      <main class="flex-1">
+        {% block content %}
+
+        {% endblock %}
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>
