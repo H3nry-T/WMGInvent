@@ -7,12 +7,13 @@
   <title>WMGInvent</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='root.css') }}">
+  
 </head>
 <body class="bg-[hsl(var(--background))] text-[hsl(var(--foreground))] font-inter">
   
   <div class="flex min-h-screen">
     <!-- SIDEBAR -->
-    <aside class="flex flex-col min-w-[240px] items-center border-r border-[hsl(var(--border))] bg-[hsl(var(--primary-background))]">
+    <aside id="sidebar" class="flex flex-col min-w-[240px] items-center border-r border-[hsl(var(--border))] bg-[hsl(var(--primary-background))]">
         <div class="p-4 flex items-center gap-4">
           <span class="text-xl font-semibold">WMGInvent</span>
           <img src="static/Box.svg" class="w-8 h-8">
@@ -63,7 +64,7 @@
       <header class="border-b border-[hsl(var(--border))] bg-[hsl(var(--primary-background))] px-4 py-2">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <button class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
+            <button id="hamburger" class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
               <img src="static/menu.svg" alt="menu button" class="w-5 h-5">
             </button>
             <button class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
@@ -105,4 +106,13 @@
   </div>
 
 </body>
+<script defer>
+    const hamburger = document.querySelector('#hamburger');
+    const sidebar = document.querySelector('#sidebar');
+    console.log(sidebar); 
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+    });
+  </script>
 </html>
