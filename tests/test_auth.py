@@ -2,7 +2,7 @@ import unittest
 from app import create_app, db
 from config import TestingConfig
 from models.UserModel import User
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class AuthTestCase(unittest.TestCase):
     @classmethod
@@ -15,12 +15,11 @@ class AuthTestCase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """Run once after all tests."""
         db.drop_all()
         cls.app_context.pop()
 
     def test_successful_register(self):
-        """Test successful user registration flow."""
+        """test register and check if user is in DB"""
         response = self.client.post(
             "/register",
             data={
@@ -33,18 +32,17 @@ class AuthTestCase(unittest.TestCase):
         )
         self.assertIn(b"Registration successful", response.data)
 
-        # Verify user in DB with credentials
         user: User | None = User.query.filter_by(username="testregister").first()
         self.assertIsNotNone(user)
         if user: 
             self.assertEqual(user.username, "testregister")
-            self.assertEqual(user.password_hash, generate_password_hash("testpassword"))
+            self.assertTrue(check_password_hash(user.password_hash, "testpassword"))
             self.assertEqual(user.role, "admin")
         else: 
             self.fail("User not found in DB")
 
     def test_failed_register(self):
-        """Test user registration flow."""
+        """test register with duplicate username"""
         response = self.client.post(
             "/register",
             data={
@@ -69,8 +67,7 @@ class AuthTestCase(unittest.TestCase):
         self.assertIn(b"Username already exists", response.data)
 
     def test_login(self):
-        """Test user login flow."""
-        # 1) Register a user
+        """test login and check redirect to electronics browse page"""
         self.client.post(
             "/register",
             data={
@@ -82,7 +79,7 @@ class AuthTestCase(unittest.TestCase):
             follow_redirects=True
         )
 
-        # 2) Attempt login
+        # login
         response = self.client.post(
             "/login",
             data={
@@ -92,12 +89,11 @@ class AuthTestCase(unittest.TestCase):
             follow_redirects=True
         )
         self.assertNotIn(b"Invalid username or password", response.data)
-        # Possibly check if we see some home page text
+        # check if we see electronics browse page
         self.assertIn(b"Browse Products", response.data)
 
     def test_logout(self):
-        """Test user logout flow."""
-        # Register and login user
+        """test logout and check redirect to login page"""
         self.client.post(
             "/register",
             data={
@@ -117,9 +113,8 @@ class AuthTestCase(unittest.TestCase):
             follow_redirects=True
         )
 
-        # Now logout
         response = self.client.get("/logout", follow_redirects=True)
-        # Check if we see "Sign in" or "Login" text, meaning we are redirected to login
+
         self.assertIn(b"Sign in to your account", response.data)
 
 if __name__ == '__main__':
