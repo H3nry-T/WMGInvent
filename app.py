@@ -11,7 +11,7 @@ from models.UserModel import User
 from flask_login import LoginManager
 from routes.auth_routes import auth_routes
 from flask_migrate import Migrate
-
+from routes.electronics_routes import electronics_routes
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -27,6 +27,7 @@ def create_app(config_class=Config):
         return User.query.get(int(user_id))
     
     app.register_blueprint(auth_routes)
+    app.register_blueprint(electronics_routes)
     return app
 
 app = create_app()
