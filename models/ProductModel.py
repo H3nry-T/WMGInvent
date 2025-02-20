@@ -9,6 +9,7 @@ class Product(db.Model):
     category = db.Column(db.String(50))  # Discriminator
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, default=0)
+    image = db.Column(db.String(255), nullable=True)
     
     __mapper_args__ = {
         'polymorphic_identity': 'products',

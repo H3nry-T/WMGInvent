@@ -28,7 +28,7 @@ class ElectronicsRepository(IRepository):
 
     def get_by_filters(self, filters):
         """Get entities matching multiple filter criteria"""
-        pass
+        return Electronic.query.filter_by(**filters).all()
 
     def bulk_create(self, entities):
         """Create multiple entities at once"""
@@ -45,6 +45,18 @@ class ElectronicsRepository(IRepository):
     def count(self, filters):
         """Count total entities, optionally filtered"""
         return Electronic.query.count()
+
+    def search(self, keyword: str) -> list[Electronic]:
+        """
+        Filter by LIKE name, description, or specification matching `keyword`.
+        """
+        query = Electronic.query.filter(
+            (Electronic.name.ilike(f"%{keyword}%")) |
+            (Electronic.description.ilike(f"%{keyword}%")) |
+            (Electronic.specification.ilike(f"%{keyword}%"))
+        )
+        return query.all()
+
     
     
     

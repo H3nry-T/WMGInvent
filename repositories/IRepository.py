@@ -51,3 +51,8 @@ class IRepository(ABC):
     def count(self, filters: Optional[Dict[str, Any]] = None) -> int:
         """Count total entities, optionally filtered"""
         pass
+
+    @abstractmethod
+    def search(self, search: str) -> List[Any]:
+        """Search for entities by name, description, specification"""
+        pass
