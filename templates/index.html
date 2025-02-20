@@ -93,18 +93,54 @@
   <div class="flex-1">
     <!-- sorting pills -->
     <div class="flex gap-2 mb-6">
-      <button class="px-4 py-2 rounded-md bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] text-sm">
-        New
-      </button>
-      <button class="px-4 py-2 rounded-md bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--accent))] text-sm">
+      <a 
+        href="{{ url_for('electronics_routes.search_electronics', 
+          search=request.args.get('search', ''),
+          min_price=request.args.get('min_price', ''),
+          max_price=request.args.get('max_price', ''),
+          stock_status=request.args.get('stock_status', ''),
+          sort_by='price_asc'
+        )}}" 
+        class="px-4 py-2 rounded-md text-sm {% if current_sort == 'price_asc' %}bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]{% else %}bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--accent))]{% endif %}"
+      >
         Price ascending
-      </button>
-      <button class="px-4 py-2 rounded-md bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--accent))] text-sm">
+      </a>
+      <a 
+        href="{{ url_for('electronics_routes.search_electronics',
+          search=request.args.get('search', ''),
+          min_price=request.args.get('min_price', ''),
+          max_price=request.args.get('max_price', ''),
+          stock_status=request.args.get('stock_status', ''),
+          sort_by='price_desc'
+        )}}" 
+        class="px-4 py-2 rounded-md text-sm {% if current_sort == 'price_desc' %}bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]{% else %}bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--accent))]{% endif %}"
+      >
         Price descending
-      </button>
-      <button class="px-4 py-2 rounded-md bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--accent))] text-sm">
-        Stock Descending
-      </button>
+      </a>
+      <a 
+        href="{{ url_for('electronics_routes.search_electronics',
+          search=request.args.get('search', ''),
+          min_price=request.args.get('min_price', ''),
+          max_price=request.args.get('max_price', ''),
+          stock_status=request.args.get('stock_status', ''),
+          sort_by='stock_desc'
+        )}}" 
+        class="px-4 py-2 rounded-md text-sm {% if current_sort == 'stock_desc' %}bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]{% else %}bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--accent))]{% endif %}"
+      >
+        Stock descending
+      </a>
+      <a 
+        href="{{ url_for('electronics_routes.search_electronics',
+          search=request.args.get('search', ''),
+          min_price=request.args.get('min_price', ''),
+          max_price=request.args.get('max_price', ''),
+          stock_status=request.args.get('stock_status', ''),
+          sort_by='stock_asc'
+        )}}" 
+        class="px-4 py-2 rounded-md text-sm {% if current_sort == 'stock_asc' %}bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]{% else %}bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--accent))]{% endif %}"
+      >
+        Stock ascending
+      </a>
     </div>
 
     <!-- product grid -->
