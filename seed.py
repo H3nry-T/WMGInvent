@@ -39,7 +39,7 @@ with app.app_context():
     laptop.processor = "M2"
     laptop.ram = "16GB"
     laptop.storage = "512GB SSD"
-    laptop.image = "https://picsum.photos/200"
+    laptop.image = "images/macbook.jpeg"
     db.session.add(laptop)
 
     phone = Electronic()
@@ -59,7 +59,7 @@ with app.app_context():
     phone.processor = "A17 Pro"
     phone.ram = "8GB"
     phone.storage = "256GB"
-    phone.image = "https://picsum.photos/200"
+    phone.image = "images/iphone.jpeg"
     db.session.add(phone)
 
     headphone = Electronic()
@@ -79,7 +79,7 @@ with app.app_context():
     headphone.processor = "Snapdragon 865"
     headphone.ram = "8GB"
     headphone.storage = "256GB"
-    headphone.image = "https://picsum.photos/200"
+    headphone.image = "images/headphones.jpeg"
     db.session.add(headphone)
     
     airpods = Electronic()
@@ -99,7 +99,7 @@ with app.app_context():
     airpods.processor = "H1 chip"
     airpods.ram = "1GB"
     airpods.storage = "16GB"
-    airpods.image = "https://picsum.photos/200"
+    airpods.image = "images/airpods.jpeg"
     db.session.add(airpods)
 
     dell_desktop = Electronic()
@@ -119,7 +119,7 @@ with app.app_context():
     dell_desktop.processor = "Intel Core i5"
     dell_desktop.ram = "8GB"
     dell_desktop.storage = "256GB SSD"
-    dell_desktop.image = "https://picsum.photos/200"
+    dell_desktop.image = "images/desktop.jpeg"
     db.session.add(dell_desktop)
 
     dell_laptop = Electronic() 
@@ -139,7 +139,7 @@ with app.app_context():
     dell_laptop.processor = "Intel Core i9"
     dell_laptop.ram = "32GB"
     dell_laptop.storage = "1TB HDD"
-    dell_laptop.image = "https://picsum.photos/200"
+    dell_laptop.image = "images/laptop.jpeg"
     db.session.add(dell_laptop)
 
     light_bulb = Electronic() 
@@ -153,7 +153,7 @@ with app.app_context():
     light_bulb.warranty_period = 12
     light_bulb.dimensions = "10 x 10 x 10 cm"
     light_bulb.weight = "0.1kg"
-    light_bulb.image = "https://picsum.photos/200"
+    light_bulb.image = "images/lightbulb.jpeg"
     db.session.add(light_bulb)
 
     usb_c_cable = Electronic()
