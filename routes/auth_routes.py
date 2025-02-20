@@ -6,14 +6,18 @@ from forms.RegisterForm import RegisterForm
 from services.AuthService import AuthenticationService
 from repositories.UserRepository import UserRepository
 from global_db_object import db
+from services.ElectronicsService import ElectronicsService
+from repositories.ElectronicsRepository import ElectronicsRepository
 
 auth_routes = Blueprint('auth', __name__)
-
 
 @auth_routes.route('/')
 @login_required
 def home():
-    return render_template('index.html', user=current_user)
+    electronics_service = ElectronicsService(ElectronicsRepository(db))
+    electronics = electronics_service.get_all_electronics()
+
+    return render_template('index.html', user=current_user, electronics=electronics)
 
 @auth_routes.route('/login', methods=['GET', 'POST'])
 def login():
