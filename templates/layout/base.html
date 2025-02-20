@@ -16,39 +16,39 @@
     <aside id="sidebar" class="flex flex-col min-w-[240px] items-center border-r border-[hsl(var(--border))] bg-[hsl(var(--primary-background))]">
         <div class="p-4 flex items-center gap-4">
           <span class="text-xl font-semibold">WMGInvent</span>
-          <img src="static/Box.svg" class="w-8 h-8">
+          <img src="{{ url_for('static', filename='Box.svg') }}" class="w-8 h-8">
         </div>
         <nav class="space-y-2 p-4 w-full">
           <a href="#" class="flex items-center gap-4 p-2 rounded-md bg-[hsl(var(--accent))]">
-            <img src="static/tv.svg" class="w-5 h-5">
+            <img src="{{ url_for('static', filename='tv.svg') }}" class="w-5 h-5">
             <div>
               <p class="font-medium">Electronics</p>
               <p class="text-sm text-[hsl(var(--muted-foreground))]">All electronics</p>
             </div>
           </a>
           <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
-            <img src="static/speaker.svg" class="w-5 h-5">
+            <img src="{{ url_for('static', filename='speaker.svg') }}" class="w-5 h-5">
             <div>
               <p class="font-medium">Furniture</p>
               <p class="text-sm text-[hsl(var(--muted-foreground))]">All furniture</p>
             </div>
           </a>
           <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
-            <img src="static/cog.svg" class="w-5 h-5">
+            <img src="{{ url_for('static', filename='cog.svg') }}" class="w-5 h-5">
             <div>
               <p class="font-medium">Auto parts</p>
               <p class="text-sm text-[hsl(var(--muted-foreground))]">All auto parts</p>
             </div>
           </a>
           <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
-            <img src="static/person.svg" class="w-5 h-5">
+            <img src="{{ url_for('static', filename='person.svg') }}" class="w-5 h-5">
             <div>
               <p class="font-medium">Fashion</p>
               <p class="text-sm text-[hsl(var(--muted-foreground))]">All fashion</p>
             </div>
           </a>
           <a href="#" class="flex items-center gap-4 p-2 rounded-md hover:bg-[hsl(var(--accent))]">
-            <img src="static/cup.svg" class="w-5 h-5">
+            <img src="{{ url_for('static', filename='cup.svg') }}" class="w-5 h-5">
             <div>
               <p class="font-medium">Food</p>
               <p class="text-sm text-[hsl(var(--muted-foreground))]">All food</p>
@@ -65,10 +65,10 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <button id="hamburger" class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
-              <img src="static/menu.svg" alt="menu button" class="w-5 h-5">
+              <img src="{{ url_for('static', filename='menu.svg') }}" alt="menu button" class="w-5 h-5">
             </button>
             <button class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
-              <img src="static/bell.svg" alt="Notifications" class="w-5 h-5">
+              <img src="{{ url_for('static', filename='bell.svg') }}" alt="Notifications" class="w-5 h-5">
             </button>
           </div>
     
@@ -81,7 +81,7 @@
             <!-- user info -->
             <div class="flex items-center gap-3 px-2 rounded-md hover:bg-[hsl(var(--accent))] cursor-pointer">
               <div class="w-6 h-6 rounded-full bg-[hsl(var(--secondary))] flex items-center justify-center">
-                <img src="static/person.svg" alt="User avatar" class="w-4 h-4">
+                <img src="{{ url_for('static', filename='person.svg') }}" alt="User avatar" class="w-4 h-4">
               </div>
               <div>
                 <span class="text-xs">{{user.username}}</span>
@@ -90,7 +90,7 @@
             </div>
             <!-- logout button -->
             <a href="/logout" class="p-2 rounded-md hover:bg-[hsl(var(--accent))]">
-              <img src="static/logout.svg" alt="Logout" class="w-5 h-5 opacity-70 hover:opacity-100">
+              <img src="{{ url_for('static', filename='logout.svg') }}" alt="Logout" class="w-5 h-5 opacity-70 hover:opacity-100">
             </a>
           </div>
         </div>

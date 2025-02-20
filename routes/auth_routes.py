@@ -14,9 +14,7 @@ auth_routes = Blueprint('auth', __name__)
 @auth_routes.route('/')
 @login_required
 def home():
-    electronics_service = ElectronicsService(ElectronicsRepository(db))
-    electronics = electronics_service.get_all_electronics()
-    return render_template('index.html', user=current_user, electronics=electronics)
+    return redirect(url_for('electronics_routes.search_electronics'))
 
 @auth_routes.route('/login', methods=['GET', 'POST'])
 def login():

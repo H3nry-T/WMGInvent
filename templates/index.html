@@ -10,12 +10,13 @@
       
       <div class="space-y-2">
         <!-- search -->
-        <form method="GET" action="/api/electronics" class="mb-4 flex items-center gap-2">
+        <form method="GET" action="{{url_for('electronics_routes.search_electronics')}}" class="mb-4 flex items-center gap-2">
           <div class="relative flex-1 min-w-0">
             <input 
               type="search" 
               name="search"
               placeholder="Search" 
+              value="{{ request.args.get('search', '') }}"
               class="w-full py-1 px-2 max-h-8 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]">
           </div>
           <button type="submit" class="shrink-0 px-2 py-1 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] text-sm rounded-md">

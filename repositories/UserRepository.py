@@ -51,3 +51,6 @@ class UserRepository(IRepository):
         self.db.session.add(user)
         self.db.session.commit()
         return user
+    
+    def search(self, keyword): 
+        pass
