@@ -11,5 +11,18 @@ electronics_service = ElectronicsService(ElectronicsRepository(db))
 @login_required
 def search_electronics():
     search_term = request.args.get("search", "")
-    electronics = electronics_service.search_electronics(search_term)
+    min_price = request.args.get("min_price", None)
+    max_price = request.args.get("max_price", None)
+
+    if min_price: 
+        min_price = float(min_price)
+    else: 
+        min_price = None
+        
+    if max_price: 
+        max_price = float(max_price)
+    else: 
+        max_price = None
+
+    electronics = electronics_service.search_electronics(search_term, min_price, max_price)
     return render_template("index.html", user=current_user, electronics=electronics)
