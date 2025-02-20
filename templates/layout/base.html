@@ -84,8 +84,8 @@
                 <img src="static/person.svg" alt="User avatar" class="w-4 h-4">
               </div>
               <div>
-                <span class="text-xs">{{user}}</span>
-                <p class="text-xs text-[hsl(var(--muted-foreground))]">Admin</p>
+                <span class="text-xs">{{user.username}}</span>
+                <p class="text-xs text-[hsl(var(--muted-foreground))] first-letter:capitalize">{{user.role}}</p>
               </div>
             </div>
             <!-- logout button -->
