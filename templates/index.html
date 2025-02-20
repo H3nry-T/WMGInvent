@@ -88,36 +88,13 @@
 
     <!-- product grid -->
     <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
-      <div class="bg-[hsl(var(--card))] rounded-lg overflow-hidden transition-transform hover:-translate-y-0.5 hover:shadow-lg">
-        <img src="images/headphones.jpg" alt="Headphones" class="w-full h-40 object-cover">
-        <h3 class="p-4 font-medium">Headphones</h3>
-        <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">30 left in stock</p>
-      </div>
-      <div class="bg-[hsl(var(--card))] rounded-lg overflow-hidden transition-transform hover:-translate-y-0.5 hover:shadow-lg">
-        <img src="images/airpods.jpg" alt="Airpods" class="w-full h-40 object-cover">
-        <h3 class="p-4 font-medium">Airpods</h3>
-        <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">2 left in stock</p>
-      </div>
-      <div class="bg-[hsl(var(--card))] rounded-lg overflow-hidden transition-transform hover:-translate-y-0.5 hover:shadow-lg">
-        <img src="images/cable.jpg" alt="USB C cables" class="w-full h-40 object-cover">
-        <h3 class="p-4 font-medium">USB C cables</h3>
-        <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">300 left in stock</p>
-      </div>
-      <div class="bg-[hsl(var(--card))] rounded-lg overflow-hidden transition-transform hover:-translate-y-0.5 hover:shadow-lg">
-        <img src="images/desktop.jpg" alt="Dell Desktop" class="w-full h-40 object-cover">
-        <h3 class="p-4 font-medium">Dell Desktop</h3>
-        <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">4 left in stock</p>
-      </div>
-      <div class="bg-[hsl(var(--card))] rounded-lg overflow-hidden transition-transform hover:-translate-y-0.5 hover:shadow-lg">
-        <img src="images/laptop.jpg" alt="Dell Laptop" class="w-full h-40 object-cover">
-        <h3 class="p-4 font-medium">Dell Laptop</h3>
-        <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">50 left in stock</p>
-      </div>
-      <div class="bg-[hsl(var(--card))] rounded-lg overflow-hidden transition-transform hover:-translate-y-0.5 hover:shadow-lg">
-        <img src="images/lightbulb.jpg" alt="Light bulb" class="w-full h-40 object-cover">
-        <h3 class="p-4 font-medium">Light bulb</h3>
-        <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">60 left in stock</p>
-      </div>
+      {% for product in electronics %}
+        <div class="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-md hover:shadow-md">
+          <img src="{{ product.image_url }}" alt="{{ product.name }}" class="w-full h-40 object-cover">
+          <h3 class="p-4 font-medium">{{ product.name }}</h3>
+          <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">{{ product.stock }} left in stock</p>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>

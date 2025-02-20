@@ -87,3 +87,8 @@ class TestInventoryService(unittest.TestCase):
     def test_get_all_electronics(self):
         electronics = self.electronics_service.get_all_electronics()
         self.assertEqual(len(electronics), 1)
+        self.assertEqual(electronics[0].name, "Iphone 16")
+        self.assertEqual(electronics[0].description, "Latest model with A17 Bionic chip")
+        self.assertEqual(electronics[0].specification, "Latest model with A17 Bionic chip")
+        self.assertEqual(electronics[0].price, 700)
+        self.assertEqual(electronics[0].stock, 5)
