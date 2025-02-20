@@ -1,6 +1,6 @@
 from repositories.IRepository import IRepository
 from models.ElectronicModel import Electronic
-
+from typing import List
 class ElectronicsRepository(IRepository):
     def __init__(self, db):
         self.db = db
@@ -46,15 +46,32 @@ class ElectronicsRepository(IRepository):
         """Count total entities, optionally filtered"""
         return Electronic.query.count()
 
-    def search(self, keyword: str) -> list[Electronic]:
+    def search(self, filters) -> List[Electronic]:
         """
         Filter by LIKE name, description, or specification matching `keyword`.
+        filter by price range if provided
+        todo: filter by stock status
         """
-        query = Electronic.query.filter(
-            (Electronic.name.ilike(f"%{keyword}%")) |
-            (Electronic.description.ilike(f"%{keyword}%")) |
-            (Electronic.specification.ilike(f"%{keyword}%"))
-        )
+        query = Electronic.query
+        # destructure filters
+        keyword = filters["keyword"]
+        min_price = filters["min_price"]
+        max_price = filters["max_price"]
+
+        # construct search query like keyword
+        if keyword:
+            query = query.filter(
+                (Electronic.name.ilike(f"%{keyword}%")) |
+                (Electronic.description.ilike(f"%{keyword}%")) |
+                (Electronic.specification.ilike(f"%{keyword}%"))
+            )
+        
+        # filter by price range
+        if min_price is not None:
+            query = query.filter(Electronic.price >= min_price)
+        if max_price is not None:
+            query = query.filter(Electronic.price <= max_price)
+        
         return query.all()
 
     

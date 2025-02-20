@@ -53,6 +53,6 @@ class IRepository(ABC):
         pass
 
     @abstractmethod
-    def search(self, search: str) -> List[Any]:
+    def search(self, filters: Dict[str, Any]) -> List[Any]:
         """Search for entities by name, description, specification"""
         pass
