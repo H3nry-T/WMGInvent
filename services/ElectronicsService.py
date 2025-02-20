@@ -21,13 +21,14 @@ class ElectronicsService:
     def get_paginated_electronics(self, page, per_page): 
         return self.electronics_repository.get_paginated(page, per_page)
     
-    def search_electronics(self, keyword: str, min_price: Optional[float] = None, max_price: Optional[float] = None): 
+    def search_electronics(self, keyword: str, min_price: Optional[float] = None, max_price: Optional[float] = None, stock_status: Optional[str] = None): 
         filters = {
             "keyword": keyword, 
             "min_price": min_price, 
-            "max_price": max_price
+            "max_price": max_price,
+            "stock_status": stock_status
         }
-        if not keyword and min_price is None and max_price is None:
+        if not keyword and min_price is None and max_price is None and stock_status is None:
             return self.electronics_repository.get_all()
         return self.electronics_repository.search(filters)
     

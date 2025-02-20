@@ -56,15 +56,24 @@
         <!-- stock filter -->
         <div>
           <h4 class="text-sm font-medium mb-3">Stock Status</h4>
-          <select name="stock_status" class="w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] text-sm">
+          <select 
+            name="stock_status" 
+            class="w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] text-sm"
+          >
             <option value="">All</option>
-            <option value="in_stock">In Stock (>0)</option>
-            <option value="low_stock">Low Stock (≤5)</option>
-            <option value="out_of_stock">Out of Stock</option>
+            <option value="in_stock" {% if request.args.get('stock_status') == 'in_stock' %}selected{% endif %}>
+                In Stock (>0)
+            </option>
+            <option value="low_stock" {% if request.args.get('stock_status') == 'low_stock' %}selected{% endif %}>
+                Low Stock (≤5)
+            </option>
+            <option value="out_of_stock" {% if request.args.get('stock_status') == 'out_of_stock' %}selected{% endif %}>
+                Out of Stock
+            </option>
           </select>
         </div>
 
-        <!-- Apply and Clear Filters -->
+        <!-- apply or clear filters -->
         <div class="space-y-2">
           <button type="submit" class="w-full py-2 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] rounded-md text-sm font-medium">
             Apply Filters

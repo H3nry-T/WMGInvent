@@ -49,13 +49,17 @@ class ElectronicsRepository(IRepository):
     def search(self, filters) -> List[Electronic]:
         """
         Filter by LIKE name, description, or specification matching `keyword`.
-        filter by price range if provided
-        todo: filter by stock status
+        Filter by price range if provided.
+        Filter by stock status:
+        - in_stock: > 0
+        - low_stock: <= 5
+        - out_of_stock: 0
 
         filters : {
             keyword: str, 
             min_price: float, 
-            max_price: float
+            max_price: float,
+            stock_status: str
         }
         """
         query = Electronic.query
@@ -63,6 +67,7 @@ class ElectronicsRepository(IRepository):
         keyword = filters["keyword"]
         min_price = filters["min_price"]
         max_price = filters["max_price"]
+        stock_status = filters["stock_status"]
 
         # construct search query like keyword
         if keyword:
@@ -77,6 +82,15 @@ class ElectronicsRepository(IRepository):
             query = query.filter(Electronic.price >= min_price)
         if max_price is not None:
             query = query.filter(Electronic.price <= max_price)
+        
+        # filter by stock status
+        if stock_status:
+            if stock_status == "in_stock":
+                query = query.filter(Electronic.stock > 0)
+            elif stock_status == "low_stock":
+                query = query.filter(Electronic.stock <= 5, Electronic.stock > 0)
+            elif stock_status == "out_of_stock":
+                query = query.filter(Electronic.stock == 0)
         
         return query.all()
 

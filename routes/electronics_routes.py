@@ -13,6 +13,7 @@ def search_electronics():
     search_term = request.args.get("search", "")
     min_price = request.args.get("min_price", None)
     max_price = request.args.get("max_price", None)
+    stock_status = request.args.get("stock_status", None)
 
     if min_price: 
         min_price = float(min_price)
@@ -24,5 +25,10 @@ def search_electronics():
     else: 
         max_price = None
 
-    electronics = electronics_service.search_electronics(search_term, min_price, max_price)
+    electronics = electronics_service.search_electronics(
+        search_term, 
+        min_price, 
+        max_price,
+        stock_status
+    )
     return render_template("index.html", user=current_user, electronics=electronics)
