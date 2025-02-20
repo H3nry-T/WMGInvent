@@ -101,10 +101,53 @@
     <!-- product grid -->
     <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
       {% for product in electronics %}
-        <div class="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-md hover:shadow-md">
-          <img src="{{ product.image_url }}" alt="{{ product.name }}" class="w-full h-40 object-cover">
-          <h3 class="p-4 font-medium">{{ product.name }}</h3>
-          <p class="px-4 pb-4 text-sm text-[hsl(var(--muted-foreground))]">{{ product.stock }} left in stock</p>
+        <div class="group bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg overflow-hidden hover:shadow-md transition-all duration-200">
+          <div class="relative aspect-[4/3] bg-[hsl(var(--muted))]">
+            {% if product.image %}
+              <img 
+                src="{{ product.image }}" 
+                alt="{{ product.name }}" 
+                class="w-full h-full object-cover"
+              >
+            {% else %}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg 
+                  class="w-12 h-12 text-[hsl(var(--muted-foreground))]" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="1" 
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- content -->
+          <div class="p-4">
+            <h3 class="font-medium text-[hsl(var(--foreground))] line-clamp-2">
+              {{ product.name }}
+            </h3>
+            <p class="mt-1 text-sm text-[hsl(var(--muted-foreground))] line-clamp-2">
+              {{ product.description }}
+            </p>
+            
+            <!-- price and stock -->
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-lg font-semibold text-[hsl(var(--foreground))]">
+                ${{ "%.2f"|format(product.price) }}
+              </span>
+              <span class="text-sm {% if product.stock <= 5 %}text-[hsl(var(--destructive))]{% else %}text-[hsl(var(--muted-foreground))]{% endif %}">
+                {{ product.stock }} in stock
+              </span>
+            </div>
+          </div>
         </div>
       {% endfor %}
     </div>
