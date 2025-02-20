@@ -51,6 +51,12 @@ class ElectronicsRepository(IRepository):
         Filter by LIKE name, description, or specification matching `keyword`.
         filter by price range if provided
         todo: filter by stock status
+
+        filters : {
+            keyword: str, 
+            min_price: float, 
+            max_price: float
+        }
         """
         query = Electronic.query
         # destructure filters

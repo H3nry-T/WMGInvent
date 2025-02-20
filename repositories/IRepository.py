@@ -54,5 +54,5 @@ class IRepository(ABC):
 
     @abstractmethod
     def search(self, filters: Dict[str, Any]) -> List[Any]:
-        """Search for entities by name, description, specification"""
+        """Filter out entities based off LOOSE filters using LIKE similar to `get_by_filters`"""
         pass
