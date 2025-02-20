@@ -13,7 +13,9 @@ from routes.auth_routes import auth_routes
 from flask_migrate import Migrate
 from routes.electronics_routes import electronics_routes
 def create_app(config_class=Config):
-    app = Flask(__name__)
+    app = Flask(__name__,
+                static_folder='static',
+                static_url_path='/static')
     app.config.from_object(config_class)
     db.init_app(app)
     

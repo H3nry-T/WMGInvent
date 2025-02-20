@@ -146,11 +146,11 @@
     <!-- product grid -->
     <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
       {% for product in electronics %}
-        <div class="group bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg overflow-hidden hover:shadow-md transition-all duration-200">
+        <div class="group bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg overflow-hidden hover:shadow-md transition-all duration-200 cursor-pointer">
           <div class="relative aspect-[4/3] bg-[hsl(var(--muted))]">
             {% if product.image %}
               <img 
-                src="{{ product.image }}" 
+                src="{{ url_for('static', filename=product.image) }}" 
                 alt="{{ product.name }}" 
                 class="w-full h-full object-cover"
               >

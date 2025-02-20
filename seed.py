@@ -39,6 +39,7 @@ with app.app_context():
     laptop.processor = "M2"
     laptop.ram = "16GB"
     laptop.storage = "512GB SSD"
+    laptop.image = "https://picsum.photos/200"
     db.session.add(laptop)
 
     phone = Electronic()
@@ -58,6 +59,7 @@ with app.app_context():
     phone.processor = "A17 Pro"
     phone.ram = "8GB"
     phone.storage = "256GB"
+    phone.image = "https://picsum.photos/200"
     db.session.add(phone)
 
     headphone = Electronic()
@@ -65,7 +67,7 @@ with app.app_context():
     headphone.description = "Noise-cancelling headphones"
     headphone.specification = "Advanced noise cancellation"
     headphone.price = 399.99
-    headphone.stock = 10
+    headphone.stock = 1
     headphone.power_rating = 10
     headphone.battery_life = 20
     headphone.energy_efficiency_rating = "A+"
@@ -77,6 +79,7 @@ with app.app_context():
     headphone.processor = "Snapdragon 865"
     headphone.ram = "8GB"
     headphone.storage = "256GB"
+    headphone.image = "https://picsum.photos/200"
     db.session.add(headphone)
     
     airpods = Electronic()
@@ -96,6 +99,7 @@ with app.app_context():
     airpods.processor = "H1 chip"
     airpods.ram = "1GB"
     airpods.storage = "16GB"
+    airpods.image = "https://picsum.photos/200"
     db.session.add(airpods)
 
     dell_desktop = Electronic()
@@ -103,7 +107,7 @@ with app.app_context():
     dell_desktop.description = "Powerful desktop for professionals"
     dell_desktop.specification = "Latest model with Intel Core i5"
     dell_desktop.price = 599.99
-    dell_desktop.stock = 90
+    dell_desktop.stock = 0
     dell_desktop.power_rating = 100
     dell_desktop.battery_life = 20
     dell_desktop.energy_efficiency_rating = "A+"
@@ -115,6 +119,7 @@ with app.app_context():
     dell_desktop.processor = "Intel Core i5"
     dell_desktop.ram = "8GB"
     dell_desktop.storage = "256GB SSD"
+    dell_desktop.image = "https://picsum.photos/200"
     db.session.add(dell_desktop)
 
     dell_laptop = Electronic() 
@@ -134,6 +139,7 @@ with app.app_context():
     dell_laptop.processor = "Intel Core i9"
     dell_laptop.ram = "32GB"
     dell_laptop.storage = "1TB HDD"
+    dell_laptop.image = "https://picsum.photos/200"
     db.session.add(dell_laptop)
 
     light_bulb = Electronic() 
@@ -147,6 +153,7 @@ with app.app_context():
     light_bulb.warranty_period = 12
     light_bulb.dimensions = "10 x 10 x 10 cm"
     light_bulb.weight = "0.1kg"
+    light_bulb.image = "https://picsum.photos/200"
     db.session.add(light_bulb)
 
     usb_c_cable = Electronic()
@@ -160,6 +167,7 @@ with app.app_context():
     usb_c_cable.warranty_period = 12
     usb_c_cable.dimensions = "1 x 1 x 100 cm"
     usb_c_cable.weight = "0.1kg"
+    usb_c_cable.image = "images/usb_c.jpeg"
     db.session.add(usb_c_cable)
     
     # Commit all changes
