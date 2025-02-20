@@ -5,7 +5,7 @@ from typing import Optional
 class Electronic(Product):
     __tablename__ = 'electronics'
     id = db.Column(db.Integer, db.ForeignKey('products.id'), primary_key=True)
-    power_rating = db.Column(db.Integer, nullable=False)
+    power_rating = db.Column(db.Integer)
     battery_life = db.Column(db.Integer)
     energy_efficiency_rating = db.Column(db.String(50))
     manufacturer = db.Column(db.String(100), nullable=False)
