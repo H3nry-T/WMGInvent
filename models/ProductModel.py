@@ -9,9 +9,9 @@ class Product(db.Model):
     category = db.Column(db.String(50))  # Discriminator
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, default=0)
-    # Polymorphic
+    
     __mapper_args__ = {
-        'polymorphic_identity': ProductCategory.ELECTRONICS,
+        'polymorphic_identity': 'products',
         'polymorphic_on': category
     }
 
