@@ -42,7 +42,7 @@ class ElectronicsRepository(IRepository):
         """Get paginated results with metadata"""
         return Electronic.query.paginate(page=page, per_page=per_page)
     
-    def count(self, filters):
+    def count(self):
         """Count total entities, optionally filtered"""
         return Electronic.query.count()
 
