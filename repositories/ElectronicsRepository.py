@@ -105,6 +105,15 @@ class ElectronicsRepository(IRepository):
         self.db.session.commit()
         return electronic
     
+    def delete(self, electronic: Electronic) -> bool:
+        try:
+            self.db.session.delete(electronic)
+            self.db.session.commit()
+            return True
+        except Exception as e:
+            self.db.session.rollback()
+            raise e
+    
     
     
     

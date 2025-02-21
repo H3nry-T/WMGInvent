@@ -44,6 +44,9 @@ class ElectronicsService:
     def update_electronic(self, electronic: Electronic) -> Electronic:
         return self.electronics_repository.update(electronic)
     
+    def delete_electronic(self, electronic: Electronic) -> bool:
+        return self.electronics_repository.delete(electronic)
+    
     
     
     

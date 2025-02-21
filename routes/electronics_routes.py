@@ -66,3 +66,23 @@ def edit_electronic(id):
             flash("Product not found, so cannot update", "danger")
 
     return render_template("product_detail.html", user=current_user, product=electronic, form=form)
+
+@electronics_routes.route("/electronics/<int:id>/delete", methods=["POST"])
+@login_required
+def delete_electronic(id):
+    if current_user.role != "admin":
+        flash("Only admins can delete products", "error")
+        return redirect(url_for("electronics_routes.get_electronic", id=id))
+    
+    electronic = electronics_service.get_electronics_by_id(id)
+    if not electronic:
+        flash("Product not found", "error")
+        return redirect(url_for("electronics_routes.search_electronics"))
+    
+    try:
+        electronics_service.delete_electronic(electronic)
+        flash("Product deleted successfully", "success")
+        return redirect(url_for("electronics_routes.search_electronics"))
+    except Exception as e:
+        flash(f"Error deleting product: {str(e)}", "error")
+        return redirect(url_for("electronics_routes.get_electronic", id=id))
