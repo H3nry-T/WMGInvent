@@ -41,6 +41,9 @@ class ElectronicsService:
             return self.electronics_repository.get_all()
         return self.electronics_repository.search(filters)
     
+    def update_electronic(self, electronic: Electronic) -> Electronic:
+        return self.electronics_repository.update(electronic)
+    
     
     
     

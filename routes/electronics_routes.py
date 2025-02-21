@@ -3,6 +3,7 @@ from services.ElectronicsService import ElectronicsService
 from repositories.ElectronicsRepository import ElectronicsRepository
 from global_db_object import db
 from flask_login import login_required, current_user
+from forms.electronics_form import ElectronicForm
 electronics_routes = Blueprint("electronics_routes", __name__)
 electronics_service = ElectronicsService(ElectronicsRepository(db))
 
@@ -45,3 +46,23 @@ def search_electronics():
 def get_electronic(id):
     electronic = electronics_service.get_electronics_by_id(id)
     return render_template("product_detail.html", user=current_user, product=electronic)
+
+@electronics_routes.route("/electronics/<int:id>/update", methods=["POST", "GET"])
+@login_required
+def edit_electronic(id):
+    electronic = electronics_service.get_electronics_by_id(id)
+    form = ElectronicForm(request.form, obj=electronic)
+    
+    if request.method == "GET": 
+        return render_template("edit_product.html", user=current_user, product=electronic, form=form)
+    
+    if form.validate_on_submit():
+        if electronic:
+            form.populate_obj(electronic)
+            electronics_service.update_electronic(electronic)
+            flash("Product updated successfully", "success")
+            return redirect(url_for("electronics_routes.get_electronic", id=id))
+        else:
+            flash("Product not found, so cannot update", "danger")
+
+    return render_template("product_detail.html", user=current_user, product=electronic, form=form)

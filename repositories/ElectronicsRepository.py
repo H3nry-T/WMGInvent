@@ -1,11 +1,11 @@
 from repositories.IRepository import IRepository
 from models.ElectronicModel import Electronic
-from typing import List
+from typing import List, Optional
 class ElectronicsRepository(IRepository):
     def __init__(self, db):
         self.db = db
         
-    def get_by_id(self, id): 
+    def get_by_id(self, id: int) -> Optional[Electronic]:
         return Electronic.query.get(id)
     
     def get_all(self): 
@@ -101,6 +101,10 @@ class ElectronicsRepository(IRepository):
         
         return query.all()
 
+    def update(self, electronic: Electronic) -> Electronic:
+        self.db.session.commit()
+        return electronic
+    
     
     
     
