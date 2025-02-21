@@ -13,6 +13,9 @@ class ElectronicsService:
     def get_electronics_by_id(self, id) -> Optional[Electronic]:
         return self.electronics_repository.get_by_id(id)
     
+    def update_electronics_by_id(self, id, electronic): 
+        return self.electronics_repository.update_by_id(id, electronic)
+    
     def create_electronic(self, electronic): 
         return self.electronics_repository.create(electronic)
     
