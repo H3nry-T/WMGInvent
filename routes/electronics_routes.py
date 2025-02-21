@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, flash, redirect, url_for
 from services.ElectronicsService import ElectronicsService
 from repositories.ElectronicsRepository import ElectronicsRepository
 from global_db_object import db
@@ -39,3 +39,9 @@ def search_electronics():
         electronics=electronics,
         current_sort=sort_by
     )
+
+@electronics_routes.route("/electronics/<int:id>", methods=["GET"])
+@login_required
+def get_electronic(id):
+    electronic = electronics_service.get_electronics_by_id(id)
+    return render_template("product_detail.html", user=current_user, product=electronic)

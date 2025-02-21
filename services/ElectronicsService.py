@@ -1,15 +1,16 @@
 from repositories.IRepository import IRepository
 from models.ElectronicModel import Electronic
+from repositories.ElectronicsRepository import ElectronicsRepository
 from typing import List, Optional
 
 class ElectronicsService: 
-    def __init__(self, electronics_repository: IRepository):
+    def __init__(self, electronics_repository: ElectronicsRepository):
         self.electronics_repository = electronics_repository
 
     def get_all_electronics(self) -> List[Electronic]:
         return self.electronics_repository.get_all()
     
-    def get_electronics_by_id(self, id):
+    def get_electronics_by_id(self, id) -> Optional[Electronic]:
         return self.electronics_repository.get_by_id(id)
     
     def create_electronic(self, electronic): 
@@ -17,9 +18,6 @@ class ElectronicsService:
     
     def count_electronics(self): 
         return self.electronics_repository.count()
-    
-    def get_paginated_electronics(self, page, per_page): 
-        return self.electronics_repository.get_paginated(page, per_page)
     
     def search_electronics(
         self, 
