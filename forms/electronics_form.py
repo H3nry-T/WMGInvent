@@ -28,8 +28,8 @@ class ElectronicForm(FlaskForm):
     storage = StringField('Storage', validators=[Optional()])
     
     # ElectronicModel.py physical specifications
-    manufacturer = StringField('Manufacturer', validators=[Optional()])
-    warranty_period = IntegerField('Warranty (months)', validators=[Optional()])
-    dimensions = StringField('Dimensions', validators=[Optional()])
-    weight = StringField('Weight', validators=[Optional()])
+    manufacturer = StringField('Manufacturer', validators=[DataRequired()])
+    warranty_period = IntegerField('Warranty (months)', validators=[DataRequired()])
+    dimensions = StringField('Dimensions', validators=[DataRequired()])
+    weight = StringField('Weight', validators=[DataRequired()])
     

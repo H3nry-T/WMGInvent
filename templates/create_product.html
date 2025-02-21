@@ -1,0 +1,141 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="p-6 max-w-3xl mx-auto">
+  <!-- Back button -->
+  <a 
+    href="{{ url_for('electronics_routes.search_electronics') }}" 
+    class="inline-flex items-center gap-2 mb-6 text-sm hover:text-[hsl(var(--primary))]"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Back to products
+  </a>
+
+  <div class="bg-[hsl(var(--card))] rounded-lg p-6">
+    <h1 class="text-2xl font-bold mb-6">Create New Product</h1>
+    
+    <form method="POST" class="space-y-6">
+      {{ form.csrf_token }}
+      
+      <!-- Basic Information -->
+      <div class="space-y-4">
+        <h2 class="text-lg font-semibold">Basic Information</h2>
+        
+        <div>
+          {{ form.name.label(class="text-sm font-medium") }}
+          {{ form.name(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+        </div>
+
+        <div>
+          {{ form.description.label(class="text-sm font-medium") }}
+          {{ form.description(rows=3, class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+        </div>
+
+        <div>
+          {{ form.image.label(class="text-sm font-medium") }}
+          {{ form.image(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            {{ form.price.label(class="text-sm font-medium") }}
+            {{ form.price(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.stock.label(class="text-sm font-medium") }}
+            {{ form.stock(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Specifications -->
+      <div class="space-y-4">
+        <h2 class="text-lg font-semibold">Technical Specifications</h2>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            {{ form.power_rating.label(class="text-sm font-medium") }}
+            {{ form.power_rating(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.battery_life.label(class="text-sm font-medium") }}
+            {{ form.battery_life(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.energy_efficiency_rating.label(class="text-sm font-medium") }}
+            {{ form.energy_efficiency_rating(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.operating_system.label(class="text-sm font-medium") }}
+            {{ form.operating_system(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.processor.label(class="text-sm font-medium") }}
+            {{ form.processor(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.ram.label(class="text-sm font-medium") }}
+            {{ form.ram(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.storage.label(class="text-sm font-medium") }}
+            {{ form.storage(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Physical Specifications -->
+      <div class="space-y-4">
+        <h2 class="text-lg font-semibold">Physical Specifications</h2>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            {{ form.manufacturer.label(class="text-sm font-medium") }}
+            {{ form.manufacturer(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.warranty_period.label(class="text-sm font-medium") }}
+            {{ form.warranty_period(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.dimensions.label(class="text-sm font-medium") }}
+            {{ form.dimensions(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+
+          <div>
+            {{ form.weight.label(class="text-sm font-medium") }}
+            {{ form.weight(class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Specifications -->
+      <div>
+        {{ form.specification.label(class="text-sm font-medium") }}
+        {{ form.specification(rows=3, class="mt-1 w-full p-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))]") }}
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-end">
+        <button 
+          type="submit"
+          class="px-4 py-2 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] rounded-md hover:opacity-90"
+        >
+          Create Product
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %} 
