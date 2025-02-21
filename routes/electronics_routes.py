@@ -4,6 +4,7 @@ from repositories.ElectronicsRepository import ElectronicsRepository
 from global_db_object import db
 from flask_login import login_required, current_user
 from forms.electronics_form import ElectronicForm
+from models.ElectronicModel import Electronic
 electronics_routes = Blueprint("electronics_routes", __name__)
 electronics_service = ElectronicsService(ElectronicsRepository(db))
 
@@ -86,3 +87,27 @@ def delete_electronic(id):
     except Exception as e:
         flash(f"Error deleting product: {str(e)}", "error")
         return redirect(url_for("electronics_routes.get_electronic", id=id))
+
+@electronics_routes.route("/electronics/new", methods=["GET", "POST"])
+@login_required
+def create_electronic():
+    if current_user.role != "admin":
+        flash("Only admins can create products", "error")
+        return redirect(url_for("electronics_routes.search_electronics"))
+    
+    form = ElectronicForm()
+    if request.method == "GET":
+        return render_template("create_product.html", user=current_user, form=form)
+    
+    if form.validate_on_submit():
+        try:
+            new_electronic = Electronic()
+            form.populate_obj(new_electronic)
+            
+            electronics_service.create_electronic(new_electronic)
+            flash("Product created successfully", "success")
+            return redirect(url_for("electronics_routes.get_electronic", id=new_electronic.id))
+        except Exception as e:
+            flash(f"Error creating product: {str(e)}", "error")
+    
+    return render_template("create_product.html", user=current_user, form=form)

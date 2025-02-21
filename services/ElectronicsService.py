@@ -16,7 +16,7 @@ class ElectronicsService:
     def update_electronics_by_id(self, id, electronic): 
         return self.electronics_repository.update_by_id(id, electronic)
     
-    def create_electronic(self, electronic): 
+    def create_electronic(self, electronic: Electronic) -> Electronic:
         return self.electronics_repository.create(electronic)
     
     def count_electronics(self): 

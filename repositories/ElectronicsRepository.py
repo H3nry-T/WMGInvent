@@ -11,10 +11,14 @@ class ElectronicsRepository(IRepository):
     def get_all(self): 
         return Electronic.query.all()
     
-    def create(self, entity): 
-        self.db.session.add(entity)
-        self.db.session.commit()
-        return entity
+    def create(self, electronic: Electronic) -> Electronic:
+        try:
+            self.db.session.add(electronic)
+            self.db.session.commit()
+            return electronic
+        except Exception as e:
+            self.db.session.rollback()
+            raise e
     
     def update_by_id(self, id, entity): 
         self.db.session.query(Electronic).filter_by(id=id).update(entity)
