@@ -12,6 +12,8 @@ from flask_login import LoginManager
 from routes.auth_routes import auth_routes
 from flask_migrate import Migrate
 from routes.electronics_routes import electronics_routes
+from routes.analytics_routes import analytics_routes
+
 def create_app(config_class=Config):
     app = Flask(__name__,
                 static_folder='static',
@@ -30,6 +32,7 @@ def create_app(config_class=Config):
     
     app.register_blueprint(auth_routes)
     app.register_blueprint(electronics_routes)
+    app.register_blueprint(analytics_routes)
     return app
 
 app = create_app()
