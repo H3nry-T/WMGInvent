@@ -17,7 +17,9 @@ class ElectronicsRepository(IRepository):
         return entity
     
     def update_by_id(self, id, entity): 
-        pass
+        self.db.session.query(Electronic).filter_by(id=id).update(entity)
+        self.db.session.commit()
+        return entity
 
     def delete_by_id(self, id): 
         pass
