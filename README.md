@@ -126,6 +126,7 @@ WMGInvent/
 
 ## Running the app 
 - ```python app.py```
+- ```python seed.py```
 
 ## Running the tests 
 - ```python -m unittest tests.py```
