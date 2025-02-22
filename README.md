@@ -37,6 +37,7 @@ A Flask-based web application for managing electronic products inventory with ad
 - **Testing**: Pytest
 
 ## Project Structure
+```
 WMGInvent/
 ├── app.py # Application entry point
 ├── config.py # Configuration settings
@@ -73,7 +74,7 @@ WMGInvent/
 └── tests/ # Test suite
 ├── test_auth.py # Authentication tests
 └── test_electronics_service.py
-
+```
 
 ### 📊 File Statistics
 - Total Python Files: 23
@@ -86,10 +87,41 @@ WMGInvent/
   - Forms: 3 files
   - Tests: 2 files
 
-  
+
 ## Dependencies 
 - Python 3.13.1
 - pip 24.3.1
+## Extensions 
+- alembic==1.14.1
+- blinker==1.9.0
+- click==8.1.8
+- dnspython==2.7.0
+- email_validator==2.2.0
+- Flask==3.1.0
+- Flask-Login==0.6.3
+- Flask-Migrate==4.1.0
+- Flask-SQLAlchemy==3.1.1
+- Flask-WTF==1.2.2
+- idna==3.10
+- itsdangerous==2.2.0
+- Jinja2==3.1.5
+- Mako==1.3.9
+- MarkupSafe==3.0.2
+- narwhals==1.27.1
+- numpy==2.2.3
+- packaging==24.2
+- pandas==2.2.3
+- plotly==6.0.0
+- python-dateutil==2.9.0.post0
+- python-dotenv==1.0.1
+- pytz==2025.1
+- six==1.17.0
+- SQLAlchemy==2.0.38
+- typing_extensions==4.12.2
+- tzdata==2025.1
+- Werkzeug==3.1.3
+- WTForms==3.2.1
+
 - ```pip install -r requirements.txt```
 
 ## Running the app 
@@ -106,13 +138,6 @@ WMGInvent/
 - `POST /electronics/<id>/delete`: Delete product
 - `GET /analytics`: View analytics dashboard
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
