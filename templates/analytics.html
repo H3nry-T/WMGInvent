@@ -1,0 +1,139 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="p-6 max-w-7xl mx-auto">
+  <h1 class="text-2xl font-bold mb-6">Analytics Dashboard</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <div class="bg-[hsl(var(--card))] p-4 rounded-lg">
+      <canvas id="priceHistogram"></canvas>
+    </div>
+
+
+    <div class="bg-[hsl(var(--card))] p-4 rounded-lg">
+      <canvas id="stockBar"></canvas>
+    </div>
+
+
+    <div class="bg-[hsl(var(--card))] p-4 rounded-lg">
+      <canvas id="priceLine"></canvas>
+    </div>
+
+
+    <div class="bg-[hsl(var(--card))] p-4 rounded-lg">
+      <canvas id="pieChart"></canvas>
+    </div>
+
+
+    <div class="bg-[hsl(var(--card))] p-4 rounded-lg md:col-span-2">
+      <canvas id="scatterPlot"></canvas>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+  const dataHist = {{ chart_data_hist|safe }};
+  const dataBar = {{ chart_data_bar|safe }};
+  const dataLine = {{ chart_data_line|safe }};
+  const dataPie = {{ chart_data_pie|safe }};
+  const dataScatter = {{ chart_data_scatter|safe }};
+
+  new Chart(document.getElementById('priceHistogram'), {
+    type: 'bar',
+    data: dataHist,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Price Distribution (Histogram)'
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Price Range' }},
+        y: { beginAtZero: true, title: { display: true, text: 'Number of Products' }}
+      }
+    }
+  });
+
+  new Chart(document.getElementById('stockBar'), {
+    type: 'bar',
+    data: dataBar,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Stock by Manufacturer (Bar)'
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Manufacturer' }},
+        y: { beginAtZero: true, title: { display: true, text: 'Stock' }}
+      }
+    }
+  });
+
+  new Chart(document.getElementById('priceLine'), {
+    type: 'line',
+    data: dataLine,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Price by Product (Line)'
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Product Name' }},
+        y: { beginAtZero: false, title: { display: true, text: 'Price ($)' }}
+      }
+    }
+  });
+
+  new Chart(document.getElementById('pieChart'), {
+    type: 'pie',
+    data: dataPie,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Market Share by Manufacturer (Pie)'
+        }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('scatterPlot'), {
+    type: 'scatter',
+    data: dataScatter,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Price vs. Stock (Scatter)'
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          beginAtZero: true,
+          title: { display: true, text: 'Price ($)' }
+        },
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Stock' }
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}
