@@ -78,7 +78,6 @@ WMGInvent/
 
 ### 📊 File Statistics
 - Total Python Files: 23
-- Total Lines of Code: ~50,000
 - Key Components:
   - Models: 4 files
   - Services: 3 files
