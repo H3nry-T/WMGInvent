@@ -15,10 +15,10 @@ class ElectronicForm(FlaskForm):
     ])
     image = StringField('Image URL', validators=[Optional()])
 
-    # ProductModel.py specification paragraph
+    # comes from ProductModel.py specification paragraph
     specification = TextAreaField('Additional Specifications', validators=[Optional()]) 
     
-    # ElectronicModel.py technical specifications
+    # comes from ElectronicModel.py technical specifications
     power_rating = IntegerField('Power Rating (W)', validators=[Optional()])
     battery_life = IntegerField('Battery Life (hours)', validators=[Optional()])
     energy_efficiency_rating = StringField('Energy Rating', validators=[Optional()])

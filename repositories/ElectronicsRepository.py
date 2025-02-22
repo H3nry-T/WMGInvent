@@ -71,7 +71,6 @@ class ElectronicsRepository(IRepository):
         stock_status = filters["stock_status"]
         sort_by = filters.get("sort_by")
 
-        # Apply existing filters...
         if keyword:
             query = query.filter(
                 (Electronic.name.ilike(f"%{keyword}%")) |
@@ -92,7 +91,6 @@ class ElectronicsRepository(IRepository):
             elif stock_status == "out_of_stock":
                 query = query.filter(Electronic.stock == 0)
 
-        # Apply sorting
         if sort_by:
             if sort_by == "price_asc":
                 query = query.order_by(Electronic.price.asc())

@@ -14,14 +14,14 @@ with app.app_context():
     print("Created tables in: ", db.engine.url, db.engine.dialect.name)
     print("Tables: ", db.metadata.tables.keys())
 
-    # Seed the data
+    # data seeding users
     admin = User()
     admin.username = "admin"
     admin.password_hash = generate_password_hash("admin123")
     admin.role = "admin"
     db.session.add(admin)
 
-    # Seed Electronics
+    # seeding some Electronics
     laptop = Electronic()
     laptop.name = "MacBook Pro"
     laptop.description = "Powerful laptop for professionals"
@@ -170,7 +170,6 @@ with app.app_context():
     usb_c_cable.image = "images/usb_c.jpeg"
     db.session.add(usb_c_cable)
     
-    # Commit all changes
     db.session.commit()
     
     print("Database seeded successfully!")

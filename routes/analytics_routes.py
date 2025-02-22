@@ -1,4 +1,3 @@
-# routes/analytics_routes.py
 
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
@@ -26,7 +25,7 @@ def show_analytics():
     min_price = min(prices)
     max_price = max(prices)
     if min_price == max_price:
-        max_price = min_price + 1  # minimal offset if all prices identical
+        max_price = min_price + 1 
 
     counts, bin_edges = np.histogram(prices, bins=bins, range=(min_price, max_price))
     labels_hist = [f'${int(edge)}' for edge in bin_edges[:-1]]
