@@ -10,7 +10,7 @@
   
 </head>
 <body class="bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
-    <!-- flash message top - right -->
+    <!-- flash message top right corner of screen fixed-->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <div class="fixed top-4 right-4 z-50 space-y-2">
@@ -107,7 +107,7 @@
         </div>
       </header>
 
-      <!-- PAGE-SPECIFIC CONTENT -->
+      <!-- PAGE-SPECIFIC CONTENT THAT IS SWAPPED OUT-->
       <main class="flex-1">
         {% block content %}
 
