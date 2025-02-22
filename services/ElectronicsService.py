@@ -13,8 +13,17 @@ class ElectronicsService:
     def get_electronics_by_id(self, id) -> Optional[Electronic]:
         return self.electronics_repository.get_by_id(id)
     
-    def update_electronics_by_id(self, id, electronic): 
-        return self.electronics_repository.update_by_id(id, electronic)
+    def update_electronics_by_id(self, id: int, updates: dict) -> Optional[Electronic]:
+        electronic = self.get_electronics_by_id(id)
+        if not electronic:
+            return None
+        
+        # go through dictionary and update the electronic object
+        for key, value in updates.items():
+            if hasattr(electronic, key):
+                setattr(electronic, key, value)
+            
+        return self.electronics_repository.update(electronic)
     
     def create_electronic(self, electronic: Electronic) -> Electronic:
         return self.electronics_repository.create(electronic)
@@ -42,6 +51,7 @@ class ElectronicsService:
         return self.electronics_repository.search(filters)
     
     def update_electronic(self, electronic: Electronic) -> Electronic:
+        """updates electronic object by providing the electronic object NOT the ID"""
         return self.electronics_repository.update(electronic)
     
     def delete_electronic(self, electronic: Electronic) -> bool:

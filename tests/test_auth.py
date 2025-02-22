@@ -63,7 +63,7 @@ class AuthTestCase(unittest.TestCase):
             },
             follow_redirects=True
         )
-        # Check if the user already exists
+        # Check if the user already exists in the html response this is found in the flash message
         self.assertIn(b"Username already exists", response.data)
 
     def test_login(self):
